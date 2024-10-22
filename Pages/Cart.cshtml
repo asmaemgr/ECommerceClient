@@ -1,0 +1,49 @@
+﻿@page
+@model ECommerceApp.Pages.CartModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h1>Your Cart</h1>
+
+@if (Model.CartItems != null && Model.CartItems.Count > 0)
+{
+    <div class="row">
+        @foreach (var item in Model.CartItems)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="@item.Product.ImageUrl" alt="Product Image" class="card-img-top" style="max-width: 100%; height: auto; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(model => item.Product.Name)</h5>
+                        <p class="card-text">
+                            Price: @item.Product.Price MAD <br />
+                            Quantity: @item.Quantity <br />
+                            Total Price: @(item.Product.Price * item.Quantity) MAD
+                        </p>
+
+                        <form method="post" asp-page-handler="UpdateQuantity" class="d-flex align-items-center">
+                            <input type="hidden" name="productId" value="@item.Product.Id" />
+                            <button type="submit" name="action" value="subtract" class="btn btn-secondary me-2" @(item.Quantity <= 1 ? "disabled" : "")>-</button>
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" max="@item.Product.Quantity" class="form-control me-2" style="width: 60px; text-align: center;" />
+                            <button type="submit" name="action" value="add" class="btn btn-secondary" @(item.Quantity >= item.Product.Quantity ? "disabled" : "")>+</button>
+                        </form>
+
+                        <form method="post" asp-page-handler="RemoveFromCart" asp-route-id="@item.Product.Id">
+                            <button type="submit" class="btn btn-danger mt-2">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <h3>Total: @Model.TotalPrice MAD</h3>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+<a asp-page="Index" class="btn btn-primary">Confirm Purchase</a>
+<a asp-page="Index" class="btn btn-secondary">Continue Shopping</a>
