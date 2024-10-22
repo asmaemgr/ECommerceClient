@@ -1,0 +1,40 @@
+﻿@page
+@model ECommerceApp.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<p>
+    <a asp-page="/Cart" class="btn btn-secondary">View Cart</a>
+</p>
+
+<form method="post" asp-page-handler="Search" class="mb-3">
+    <div class="input-group">
+        <input type="text" asp-for="SearchTerm" placeholder="Search by Name or Description" class="form-control" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var item in Model.Product)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@item.ImageUrl" alt="Product Image" class="card-img-top" style="max-width: 100%; height: auto; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    <p class="card-text"><strong>Price: </strong>@Html.DisplayFor(modelItem => item.Price)</p>
+                    <p class="card-text"><strong>Available Quantity: </strong>@Html.DisplayFor(modelItem => item.Quantity)</p>
+                    <form method="post" asp-page-handler="AddToCart" asp-route-id="@item.Id">
+                        <input type="number" name="quantity" value="1" min="1" max="@item.Quantity" class="form-control d-inline-block" style="width: 80px; display: inline-block;" />
+                        <button type="submit" class="btn btn-primary mt-2" @(item.Quantity == 0 ? "disabled" : "")>Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
