@@ -3,7 +3,15 @@ using Microsoft.AspNetCore.Session;
 using ECommerceApp.Data;
 using ECommerceApp.Services;
 using System.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login"; // Redirect here if not authenticated
+        options.AccessDeniedPath = "/AccessDenied"; // Redirect for unauthorized access
+    });
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -37,7 +45,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession(); // Enable session middleware
+// Enable session middleware
+app.UseSession(); 
+
+// Use Authentication and Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

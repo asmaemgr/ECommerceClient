@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using ECommerceApp.Data;
 using ECommerceApp.Models;
 using ECommerceApp.Services;
-using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ECommerceApp.Pages
 {
+    [Authorize(Roles = "Client")]
     public class IndexModel : PageModel
     {
-        private readonly ECommerceApp.Data.ECommerceAppContext _context;
+        private readonly Data.ECommerceAppContext _context;
 
         private readonly CartService _cartService;
 
-        public IndexModel(ECommerceApp.Data.ECommerceAppContext context, CartService cartService)
+        public IndexModel(Data.ECommerceAppContext context, CartService cartService)
         {
             _context = context;
             _cartService = cartService;
@@ -79,6 +77,12 @@ namespace ECommerceApp.Pages
             }
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostLogout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToPage("/Admin/Index");
         }
 
     }

@@ -506,3 +506,10 @@ C:\Users\DELL\source\repos\ECommerceClient\obj\Debug\net8.0\refint\ECommerceApp.
 C:\Users\DELL\source\repos\ECommerceClient\obj\Debug\net8.0\ECommerceApp.pdb
 C:\Users\DELL\source\repos\ECommerceClient\obj\Debug\net8.0\ECommerceApp.genruntimeconfig.cache
 C:\Users\DELL\source\repos\ECommerceClient\obj\Debug\net8.0\ref\ECommerceApp.dll
+C:\Users\DELL\source\repos\ECommerceClient\obj\Debug\net8.0\ECommerceApp.sourcelink.json
+C:\Users\DELL\source\repos\ECommerceClient\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\DELL\source\repos\ECommerceClient\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\DELL\source\repos\ECommerceClient\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\DELL\source\repos\ECommerceClient\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\DELL\source\repos\ECommerceClient\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\DELL\source\repos\ECommerceClient\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

@@ -1,11 +1,11 @@
-using ECommerceApp.Models;
 using ECommerceApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
 
 namespace ECommerceApp.Pages
 {
+    [Authorize(Roles = "Client")]
     public class CartModel : PageModel
     {
         private readonly CartService _cartService;

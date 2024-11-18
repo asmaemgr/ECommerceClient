@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<!-- Display error message if it exists -->
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.ErrorMessage
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="username" class="form-label">Login</label>
+        <input type="text" name="username" id="username" class="form-control" placeholder="Enter username">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+    </div>
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+</form>
